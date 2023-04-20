@@ -10,13 +10,8 @@ An university group project to create an application using microcontroller
 </ul>
 <h2>Project Topic</h2>
 <ol>
-<li>Thu nhận dữ liệu từ sensor và xử lý</li>
-<li>Điều khiển robot</li>
-<li>Giao tiếp I2C/SPI/UART/IR/Bluetooth với thiết bị khác</li>
+<li>Điều khiển xe từ xa, sử dụng Android App và camera sử dụng STM32</li>
 </ol>
-<h3>Lưu ý</h3>
-<p>Bắt buộc dùng <strong>PIC</strong> hoặc <strong>STM</strong>, nếu dùng <strong>STM</strong> thì phải có trình bày cơ chế cài đặt, cấu hình và nguyên lý hoặt động của module chức năng</p>
-<p><strong>Đề tài sẽ được cập nhật khi nhóm đã chọn 1 đề tài</strong></p>
           
 <h2>Final Semester Report</h2>         
 <ul>
@@ -24,3 +19,10 @@ An university group project to create an application using microcontroller
 <li>Slide trình bày</li>
 <li>Sản phầm thực tế</li>
 </ul>
+
+<h1>Deadline</h1>
+
+![image](https://user-images.githubusercontent.com/104358167/233408715-775ae061-5442-4b8b-bb15-498c137dc2f0.png)
+
+<h1>STM32 Documentations</h1>
+Tài liệu tham khảo của STM32, [bấm đây](https://studenthcmusedu-my.sharepoint.com/personal/20207079_student_hcmus_edu_vn/_layouts/15/onedrive.aspx?id=%2Fpersonal%2F20207079%5Fstudent%5Fhcmus%5Fedu%5Fvn%2FDocuments%2FVi%20%C4%90i%E1%BB%81u%20Khi%E1%BB%83n&ga=1)

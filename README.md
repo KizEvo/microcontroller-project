@@ -15,8 +15,8 @@ An university group project to create an application using microcontroller
           
 <h2>Final Semester Report</h2>         
 <ul>
-<li>Cuốn báo cáo cứng được viết bằng word</li>
-<li>Slide trình bày</li>
+<li>Cuốn báo cáo cứng được viết bằng word (L)</li>
+<li>Slide trình bày (M)</li>
 <li>Sản phầm thực tế</li>
 </ul>
 
@@ -34,3 +34,7 @@ An university group project to create an application using microcontroller
 - STM32F103C8T6 Datasheet, [bấm đây](https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
 
 - STM32 ST Link V2 (Programmer/Debugger) Datasheet, [bấm đây](https://www.st.com/resource/en/user_manual/um1075-stlinkv2-incircuit-debuggerprogrammer-for-stm8-and-stm32-stmicroelectronics.pdf)
+
+<h1>PCB DIY</h1>
+
+- Một số kênh Youtube tiếng Việt hướng dẫn thiết kế PCB, [bấm đây](https://www.youtube.com/watch?v=cSquACNWPag)

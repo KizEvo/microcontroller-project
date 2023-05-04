@@ -10,7 +10,7 @@ An university group project to create an application using microcontroller
 </ul>
 <h2>Project Topic</h2>
 <ol>
-<li>Xe điều khiển từ xa, sử dụng Android App và camera dùng dòng vi điều khiển STM32</li>
+<li>Xe điều khiển từ xa, sử dụng Android App và HC-SR04 (cảm biến siêu âm) dùng dòng vi điều khiển STM32</li>
 </ol>
           
 <h2>Final Semester Report</h2>         

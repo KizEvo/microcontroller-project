@@ -1,8 +1,16 @@
-# STM32F103C8T6 Pins Config
-![image](https://user-images.githubusercontent.com/104358167/236160713-cb1d7a15-a1cc-4931-927e-bceb135b34e5.png)
-# TIMER 1 Pin Config
-![image](https://user-images.githubusercontent.com/104358167/236161358-2356c91e-717e-457c-a8e4-6dd608f21f43.png)
-# USART 1 Pin Config
-![image](https://user-images.githubusercontent.com/104358167/236161637-2c5a990a-bdbb-452f-91cb-9b4a03ac3a15.png)
-![image](https://user-images.githubusercontent.com/104358167/236161673-c508cd7c-e252-490f-979f-5fcc31322277.png)
-
+# STM32F103C8T6 Pins Selection
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/91ca1744-f66a-4f36-997c-8f56b3b46896)
+# TIMER 1 Pin Configs
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/8a823a32-437f-4ac1-b9f9-535eef5dfb65)
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/2a44823d-7897-4e0f-9810-7d1a7c99f95e)
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/609cbbb0-a684-4e0e-a7a1-afb2a8d439ca)
+# TIMER 2 Pin Configs
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/a2dd842b-5fc5-4ddf-8aca-b9b26ba361f2)
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/59f901d9-01e2-4e72-8031-47dfe1cdbdd7)
+# TIMER 3 Pin Configs
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/6549ccc0-e536-4fac-b37f-5e78526013d4)
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/d79264ff-676e-4752-a4d6-cbd82857d7d9)
+# USART 1 Pin Configs
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/3e631a95-f233-4446-8782-be349b3ce513)
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/72358244-33cb-40d7-a737-3089f71d2124)
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/deaf4aaa-c1d3-4bd7-8bdc-936c440a9041)

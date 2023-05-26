@@ -14,3 +14,6 @@
 ![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/3e631a95-f233-4446-8782-be349b3ce513)
 ![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/72358244-33cb-40d7-a737-3089f71d2124)
 ![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/deaf4aaa-c1d3-4bd7-8bdc-936c440a9041)
+# NVIC Configs
+![image](https://github.com/KizEvo/microcontroller-project/assets/104358167/c424f7a2-f687-4e84-800e-20b355ee4ea5)
+

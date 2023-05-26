@@ -49,8 +49,9 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 uint8_t x;
 uint8_t rxData;
-uint8_t data[] = { 30, 0 };
+uint8_t data[] = { 30, 0, 60, 0, 90, 0, 120, 0, 150, 0};
 uint8_t Distance  = 0;
+uint8_t dis;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -71,6 +72,12 @@ void delay_us(uint16_t time)
 	__HAL_TIM_SET_COUNTER(&htim1,0);
 	while(__HAL_TIM_GET_COUNTER(&htim1) < time )
 	{}
+}
+
+void testDelay50Ms(uint8_t repeatTime){
+	for(uint8_t i = 0; i < repeatTime; i++){
+		delay_us(50000);
+	}
 }
 
 uint32_t IC_Val1 = 0;
@@ -116,13 +123,14 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		}
 	}
 }
-void HCSR04_Read (void)
+uint8_t HCSR04_Read (void)
 {
 	HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_SET);  // pull the TRIG pin HIGH
 	delay_us(10);  // wait for 10 us
 	HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_RESET);  // pull the TRIG pin low
 
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
+	return Distance;
 }
 /* USER CODE END 0 */
 
@@ -169,8 +177,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
-		HCSR04_Read();
-		HAL_Delay(200);
+//		dis = HCSR04_Read();
+//		HAL_Delay(200);
 		}
     /* USER CODE END WHILE */
 
@@ -473,18 +481,40 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 			
-//			HCSR04_Read();
-			data[0] = 60;
-			data[1] = Distance;
-			
-			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
+			dis = HCSR04_Read();
 
 			HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
-			for (x = 10; x < 90; x++) {
+			for (x = 50; x <= 110; x++) {
 				__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, x);
-				for (int t = 30000; t > 0; t--) {}
+				delay_us(200);
+				if (x == 50)
+				{
+					data[1] = HCSR04_Read();
+					testDelay50Ms(20);
+				}
+				if (x == 65)
+				{
+					data[3] = HCSR04_Read();
+					testDelay50Ms(20);
+				}
+				if (x == 80)
+				{
+					data[5] = HCSR04_Read();
+					testDelay50Ms(20);
+				}
+				if (x == 95)
+				{
+					data[7] = HCSR04_Read();
+					testDelay50Ms(20);
+				}
+				if (x == 110)
+				{
+					data[9] = HCSR04_Read();
+					testDelay50Ms(20);
+				}
 			}
-			for (x = 90; x > 10; x--) {
+			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
+			for (x = 100; x >= 50; x--) {
 				__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, x);
 				for (int q = 30000; q > 0; q--) {}
 			}
@@ -498,7 +528,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 
 			data[0] = rxData;
-			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
+			
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, rxData * 5);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, rxData * 5);
 		}
@@ -507,8 +537,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+			
 			data[0] = rxData;
-			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
+			
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (rxData - 64) * 5);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, (rxData - 64) * 5);
 		}
@@ -517,8 +548,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+			
 			data[0] = rxData;
-			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
+			
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (rxData - 128) * 5);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, (rxData - 128) * 5);
 		}
@@ -527,8 +559,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+			
 			data[0] = rxData;
-			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);
+			
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (rxData - 192) * 5);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, (rxData - 192) * 5);
 		}

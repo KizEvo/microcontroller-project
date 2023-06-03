@@ -90,6 +90,7 @@ uint8_t Is_First_Captured = 0;  // is the first value captured ?
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
+	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)  // if the interrupt source is channel1
 	{
 		if (Is_First_Captured==0) // if the first value is not captured
@@ -177,6 +178,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
+
 //		dis = HCSR04_Read();
 //		HAL_Delay(200);
 		}
@@ -446,15 +448,26 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PA3 PA4 PA5 PA6 */
   GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
@@ -475,12 +488,19 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (huart->Instance == USART1) {
+		if (rxData == 53) {
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+	
+		}
 		if (rxData == 52) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
-			
+
 			dis = HCSR04_Read();
 
 			HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
@@ -527,8 +547,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 
-			data[0] = rxData;
-			
+
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, rxData * 5);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, rxData * 5);
 		}
@@ -537,9 +556,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
-			
-			data[0] = rxData;
-			
+
+
+
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (rxData - 64) * 5);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, (rxData - 64) * 5);
 		}
@@ -548,23 +567,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
-			
-			data[0] = rxData;
-			
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (rxData - 128) * 5);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, (rxData - 128) * 5);
+
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 110);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 110);
 		}
 		if (192 <= rxData && rxData < 244) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
-			
-			data[0] = rxData;
-			
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, (rxData - 192) * 5);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, (rxData - 192) * 5);
+
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 110);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 110);
 		}
+		
 		HAL_UART_Receive_IT(&huart1, &rxData, 1); // Enabling interrupt receive again
 	}
 }

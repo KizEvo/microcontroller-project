@@ -124,14 +124,13 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 		}
 	}
 }
-uint8_t HCSR04_Read (void)
+void HCSR04_Read ()
 {
 	HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_SET);  // pull the TRIG pin HIGH
 	delay_us(10);  // wait for 10 us
 	HAL_GPIO_WritePin(TRIG_PORT, TRIG_PIN, GPIO_PIN_RESET);  // pull the TRIG pin low
 
 	__HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
-	return Distance;
 }
 /* USER CODE END 0 */
 
@@ -501,7 +500,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
 
-			dis = HCSR04_Read();
+			HCSR04_Read();
 
 			HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
 			for (x = 50; x <= 110; x++) {
@@ -509,28 +508,33 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 				delay_us(200);
 				if (x == 50)
 				{
-					data[1] = HCSR04_Read();
+					HCSR04_Read();
 					testDelay50Ms(20);
+					data[1] = Distance;
 				}
 				if (x == 65)
 				{
-					data[3] = HCSR04_Read();
+					HCSR04_Read();
 					testDelay50Ms(20);
+					data[3] = Distance;
 				}
 				if (x == 80)
 				{
-					data[5] = HCSR04_Read();
+					HCSR04_Read();
 					testDelay50Ms(20);
+					data[5] = Distance;
 				}
 				if (x == 95)
 				{
-					data[7] = HCSR04_Read();
+					HCSR04_Read();
 					testDelay50Ms(20);
+					data[7] = Distance;
 				}
 				if (x == 110)
 				{
-					data[9] = HCSR04_Read();
+					HCSR04_Read();
 					testDelay50Ms(20);
+					data[9] = Distance;
 				}
 			}
 			HAL_UART_Transmit(&huart1, data, sizeof(data), 10);

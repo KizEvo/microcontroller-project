@@ -1,7 +1,12 @@
 <h1>Microcontroller Project</h1>
 
 **A remote controlled robot with Android App and HC-SR04 as a radar to scan nearby objects using STM32F103C8T6**. It was made during my ETC10010 course project as a team of 6 people.
-
+  > Some of my responsibilities during this project:
+  > - Designed overall layout of Android App and functionality
+  > - Implemented BLE connection between Android App and the microcontroller
+  > - Designed robot structure
+  > - THT soldering electronic components
+  > - Lead the team: organized meetings, separation of tasks, helped teammates debug, testing, etc. 
 <h2>Images</h2>
 
 | PCB Layout  | Schematic |
